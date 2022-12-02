@@ -18,7 +18,7 @@ fn main() {
     let mut current_total: u32 = 0;
     while io::stdin().read_line(&mut line).unwrap_or(0) != 0 {
         line = line.trim().to_string();
-        if line.len() == 0 {
+        if line.is_empty() {
             calories_by_elf.push(current_total);
 
             current_total = 0;
