@@ -1,5 +1,16 @@
 use std::io;
 
+/// Takes in newline-separated numbers, where a blank line indicates a new elf.
+/// Sum up the numbers and print the elves with the top 3 sums.
+///
+/// # Examples
+/// ```
+/// 1000
+/// 2000
+///
+/// 4000
+/// ```
+/// Returns [4000, 3000]
 fn main() {
     let mut line = String::new();
 
