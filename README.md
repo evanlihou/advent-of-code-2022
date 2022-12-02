@@ -7,3 +7,21 @@ filled up.
 This is my first foray into Rust 🙂
 
 I'll probably fill out this readme more later.
+
+## Init a new day
+```bash
+take xx-challenge-name
+cargo init --vcs none --name aoc-xx
+```
+
+## Useful Commands
+
+Run
+```bash
+cargo run < input.txt
+```
+
+Lint
+```bash
+cargo clippy
+```
