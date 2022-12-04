@@ -17,15 +17,13 @@ fn main() {
 
         // Not a huge fan of the intermediate step of storing them as &str's
         // Would much rather go straight from the split into getting u32's
-        let (elf_a, elf_b) = line.split_once(',').unwrap();
-        let (a_start_str, a_end_str) = elf_a.split_once('-').unwrap();
-        let (a_start, a_end) = (a_start_str.parse::<u32>().unwrap(), a_end_str.parse::<u32>().unwrap());
-        let (b_start_str, b_end_str) = elf_b.split_once('-').unwrap();
-        let (b_start, b_end) = (b_start_str.parse::<u32>().unwrap(), b_end_str.parse::<u32>().unwrap());
+        let ((a_start, a_end), (b_start, b_end)) = parse_pairs(line.clone())
+            .expect("Failed to parse a u32 in the line");
 
         if aoc_phase == 1 {
             // Find the number that overlap completely
-            if a_start <= b_start && a_end >= b_end || b_start <= a_start && b_end >= a_end {
+            if a_start <= b_start && a_end >= b_end
+               || b_start <= a_start && b_end >= a_end {
                 num_overlaps += 1;
             }
 
@@ -42,4 +40,16 @@ fn main() {
     };
 
     println!("Num overlaps: {}", num_overlaps);
+}
+
+fn parse_pairs(line: String) -> Result<((u32, u32), (u32, u32)), std::num::ParseIntError> {
+    // Not a huge fan of the intermediate step of storing them as &str's
+    // Would much rather go straight from the split into getting u32's
+    let (elf_a, elf_b) = line.split_once(',').expect("No ',' found");
+    let (a_start_str, a_end_str) = elf_a.split_once('-').expect("No '-' in A");
+    let (a_start, a_end) = (a_start_str.parse::<u32>()?, a_end_str.parse::<u32>()?);
+    let (b_start_str, b_end_str) = elf_b.split_once('-').expect("No '-' in B");
+    let (b_start, b_end) = (b_start_str.parse::<u32>()?, b_end_str.parse::<u32>()?);
+
+    Ok(((a_start, a_end), (b_start, b_end)))
 }
