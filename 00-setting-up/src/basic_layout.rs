@@ -1,4 +1,4 @@
-use std::io;
+use std::{io, env};
 
 fn main() {
     let aoc_phase = env::var("AOC_PHASE").unwrap_or("1".to_string())
